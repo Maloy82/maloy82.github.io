@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Koca Project — Привилегии</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#0c0c0f;--bg2:#15151a;--line:#26262e;--tx:#f3f3f6;--mut:#9a9aa6;--red:#e03a44;--gold:#e8b84a;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6f6f8;--bg2:#fff;--line:#dcdce3;--tx:#16161b;--mut:#5f5f6b;color-scheme:light}}
+:root[data-theme="dark"]{--bg:#0c0c0f;--bg2:#15151a;--line:#26262e;--tx:#f3f3f6;--mut:#9a9aa6}
+html{scroll-padding-top:70px;scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:22px;padding:14px 5vw;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:20px;letter-spacing:.5px}
+.logo b{color:var(--red)}
+nav{display:flex;gap:20px;flex:1;overflow-x:auto;white-space:nowrap}
+nav a{color:var(--mut);text-decoration:none;font-size:14px;font-weight:500;padding:6px 0;border-bottom:2px solid transparent}
+nav a:hover{color:var(--tx)}nav a.on{color:var(--gold);border-color:var(--gold)}
+.btn{display:inline-block;border:1px solid var(--line);background:var(--bg2);color:var(--tx);padding:9px 16px;border-radius:9px;font:600 13px inherit;font-family:inherit;cursor:pointer;text-decoration:none}
+.btn.red{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 4px 18px rgba(224,58,68,.35)}
+.btn.gold{color:var(--gold);border-color:#5c4a1c;background:rgba(232,184,74,.08)}
+main{max-width:1100px;margin:0 auto;padding:40px 5vw 60px}
+.crumbs{font-size:12px;color:var(--mut)}
+h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:18px 0 14px;max-width:640px;font-weight:800}
+.lead{color:var(--mut);max-width:560px;font-size:16px}
+.promo{margin-top:14px;max-width:560px}
+.tag{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;margin-right:6px;letter-spacing:.4px}
+.tog{display:inline-flex;margin:36px 0 22px;padding:5px;border:1px solid var(--line);border-radius:999px;background:var(--bg2)}
+.tog button{border:0;background:none;color:var(--mut);font:600 14px inherit;font-family:inherit;padding:9px 20px;border-radius:999px;cursor:pointer}
+.tog button.on{background:var(--red);color:#fff}
+.tog small{background:rgba(60,190,120,.18);color:#4cd694;font-size:10px;padding:1px 7px;border-radius:6px;margin-left:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px}
+.card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg2);display:flex;flex-direction:column}
+.cover{position:relative;height:190px;display:grid;place-items:center;background:radial-gradient(circle at 50% 120%,var(--c) 0%,transparent 60%),linear-gradient(180deg,#1b1b24,#08080b)}
+.cover .tag{position:absolute;left:12px;top:12px;margin:0}
+.cover h2{margin:0;font-size:clamp(40px,7vw,62px);font-weight:900;font-style:italic;letter-spacing:1px;background:linear-gradient(180deg,#fff,var(--c));-webkit-background-clip:text;background-clip:text;color:transparent;text-transform:uppercase;filter:drop-shadow(0 4px 14px var(--c))}
+.body{padding:20px;display:flex;flex-direction:column;gap:14px;flex:1}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price b{font-size:30px}.price s{color:var(--mut)}.price span{color:var(--mut);font-size:13px}
+.body ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:14px;flex:1}
+.body li{padding-left:22px;position:relative}
+.body li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
+.body .btn{text-align:center;padding:12px}
+section.blk{margin-top:56px;padding-top:8px}
+section.blk h3{font-size:24px;margin:0 0 10px}
+section.blk p{color:var(--mut);white-space:pre-line;max-width:700px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:13px;text-align:center;padding:26px 5vw}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:grid;place-items:center;z-index:20;padding:20px}
+.modal>div{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:24px;width:min(420px,100%);display:grid;gap:12px}
+.modal h4{margin:0;font-size:20px}
+input,textarea,select{width:100%;background:var(--bg);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:14px inherit;font-family:inherit}
+textarea{min-height:84px;resize:vertical}
+label{display:grid;gap:4px;font-size:12px;color:var(--mut)}
+#adm .fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;box-shadow:0 6px 24px rgba(0,0,0,.4)}
+#adm .panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg2);border-left:1px solid var(--line);z-index:40;overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(90px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;align-content:start}
+#adm .panel h5{margin:10px 0 0;font-size:15px;color:var(--gold)}
+#adm .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#adm .bar{position:sticky;bottom:calc(-90px - env(safe-area-inset-bottom,0px));display:flex;gap:8px;background:var(--bg2);padding:12px 0;border-top:1px solid var(--line)}
+#adm .pl{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
+#msg{color:var(--mut);font-size:12px;align-self:center}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="adm"></div>
+<script id="data" type="application/json">{"site":{"name":"Koca Project","short":"KP","ip":"","discord":"","payUrl":"","footer":"© Koca Project. Все права защищены.","admUser":"admin","admHash":"9269e09c1e04db3379387ab88b94283927879160cf205aca6ff673297fd30636"},"nav":[["Как начать","#start"],["Серверы","#servers"],["Правила","#rules"],["Донат","#donate"],["Привилегии","#priv"]],"hero":{"title":"Привилегии MAJOR и Premium","text":"Права администрации, дополнительные слоты для машин и секретные команды. Выдаются автоматически сразу после оплаты.","promoOn":true,"promo":"Скидки на все привилегии: MAJOR от 999 ₽ вместо 1200 ₽, Premium от 699 ₽ вместо 799 ₽."},"plans":[{"name":"Major","color":"#e8b84a","badge":"АКЦИЯ","month":999,"monthOld":1200,"forever":2999,"foreverOld":3999,"features":["Права администрации (ACL)","Дополнительные слоты для машин","Секретные команды","Собственный тег в чате (/teg)","Бонус за каждые 3 часа игры"]},{"name":"Premium","color":"#d6dae3","badge":"АКЦИЯ","month":699,"monthOld":799,"forever":1999,"foreverOld":2499,"features":["Расширенные права","Дополнительные слоты для машин","Часть секретных команд","Бонус за каждые 3 часа игры"]}],"blocks":[{"id":"start","title":"Как начать","text":"1. Установите MTA:SA.\n2. Подключитесь к серверу через IP, указанный ниже.\n3. Зарегистрируйтесь и начните играть."},{"id":"servers","title":"Серверы","text":"Здесь появится информация о ваших серверах."},{"id":"rules","title":"Правила","text":"Здесь появятся правила проекта."},{"id":"donate","title":"Донат","text":"Привилегии выдаются автоматически сразу после оплаты. Выберите срок: на месяц или навсегда."}]}</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+let per='month',isAdmin=false,open=false;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Number(n||0).toLocaleString('ru-RU')+' ₽';
+
+function site(){
+  const S=D.site,H=D.hero;
+  document.title=S.name+' — Привилегии';
+  $('#app').innerHTML=`
+  <header><div class="logo">${esc(S.short)}<b>·</b></div>
+  <nav>${D.nav.map(n=>`<a href="${esc(n[1])}" class="${n[1]==='#priv'?'on':''}">${esc(n[0])}</a>`).join('')}</nav>
+  ${S.discord?`<a class="btn" href="${esc(S.discord)}" target="_blank" rel="noopener">Discord</a>`:''}
+  <a class="btn red" href="#priv">Начать играть</a></header>
+  <main>
+  <div class="crumbs">Главная / Донат / Привилегии</div>
+  <h1>${esc(H.title)}</h1><p class="lead">${esc(H.text)}</p>
+  ${H.promoOn?`<p class="promo"><span class="tag">АКЦИЯ</span>${esc(H.promo)}</p>`:''}
+  <div id="priv"><div class="tog"><button data-p="month" class="${per==='month'?'on':''}">На месяц</button><button data-p="forever" class="${per==='forever'?'on':''}">Навсегда<small>выгоднее</small></button></div>
+  <div class="grid">${D.plans.map((p,i)=>{const pr=p[per],old=p[per+'Old'];return `<div class="card" style="--c:${esc(p.color)}">
+    <div class="cover">${p.badge?`<span class="tag">${esc(p.badge)}</span>`:''}<h2>${esc(p.name)}</h2></div>
+    <div class="body"><div class="price"><b>${fmt(pr)}</b>${old?`<s>${fmt(old)}</s>`:''}<span>${per==='month'?'/ 30 дней':'навсегда'}</span></div>
+    <ul>${p.features.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
+    <button class="btn red" data-buy="${i}">Купить ${esc(p.name)}</button></div></div>`}).join('')}</div></div>
+  ${D.blocks.map(b=>`<section class="blk" id="${esc(b.id)}"><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p>${b.id==='start'&&S.ip?`<p><b style="color:var(--tx)">IP сервера:</b> ${esc(S.ip)}</p>`:''}</section>`).join('')}
+  </main><footer>${esc(S.footer)} · <a href="#admin" id="alogin" style="color:inherit">Вход для админа</a></footer>`;
+  const al=$('#alogin');if(al)al.onclick=e=>{e.preventDefault();login()};
+  document.querySelectorAll('.tog button').forEach(b=>b.onclick=()=>{per=b.dataset.p;site()});
+  document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>buy(+b.dataset.buy));
+}
+
+function buy(i){
+  const p=D.plans[i],m=document.createElement('div');m.className='modal';
+  m.innerHTML=`<div><h4>${esc(p.name)} — ${per==='month'?'на 30 дней':'навсегда'}</h4>
+  <div class="price"><b>${fmt(p[per])}</b></div>
+  <label>Ваш игровой ник<input id="nick" placeholder="Nick_Name" maxlength="32"></label>
+  <button class="btn red" id="go">Перейти к оплате</button><button class="btn" id="cl">Отмена</button></div>`;
+  $('#app').appendChild(m);
+  m.onclick=e=>{if(e.target===m)m.remove()};m.querySelector('#cl').onclick=()=>m.remove();
+  m.querySelector('#go').onclick=()=>{
+    const n=m.querySelector('#nick').value.trim();
+    if(!n){m.querySelector('#nick').focus();return}
+    if(!D.site.payUrl){alert('Ссылка на оплату ещё не настроена администратором.');return}
+    const u=D.site.payUrl+(D.site.payUrl.includes('?')?'&':'?')+new URLSearchParams({nick:n,plan:p.name,period:per,amount:p[per]});
+    window.open(u,'_blank','noopener');
+  };
+}
+
+/* ---------- Админ-панель (видна только владельцу страницы) ---------- */
+const val=(path,v)=>{const k=path.split('.');let o=D;for(let i=0;i<k.length-1;i++)o=o[k[i]];o[k.at(-1)]=v};
+const inp=(label,path,v,type='text')=>`<label>${label}<input type="${type}" data-k="${path}" value="${esc(v)}"></label>`;
+const area=(label,path,v)=>`<label>${label}<textarea data-k="${path}">${esc(v)}</textarea></label>`;
+
+function adm(){
+  if(!isAdmin){$('#adm').innerHTML='';return}
+  if(!open){$('#adm').innerHTML='<button class="btn gold fab" id="op">⚙ Админ-панель</button>';$('#op').onclick=()=>{open=true;adm()};return}
+  const S=D.site,H=D.hero;
+  $('#adm').innerHTML=`<div class="panel">
+  <h5>Проект</h5>${inp('Название','site.name',S.name)}
+  <div class="row">${inp('Логотип (кратко)','site.short',S.short)}${inp('IP сервера','site.ip',S.ip)}</div>
+  ${inp('Ссылка Discord','site.discord',S.discord)}${inp('Ссылка на оплату (получит ?nick=&amp;plan=&amp;amount=)','site.payUrl',S.payUrl)}${inp('Подвал','site.footer',S.footer)}${inp('Логин админа','site.admUser',S.admUser)}<label>Новый пароль (пусто — не менять)<input id="npw" type="password" autocomplete="new-password"></label>
+  <h5>Шапка страницы</h5>${inp('Заголовок','hero.title',H.title)}${area('Описание','hero.text',H.text)}
+  <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="width:auto" data-c="hero.promoOn" ${H.promoOn?'checked':''}> Показывать акцию</label>
+  ${area('Текст акции','hero.promo',H.promo)}
+  <h5>Меню (по строке: Название | #якорь)</h5>
+  <label><textarea data-nav>${esc(D.nav.map(n=>n.join(' | ')).join('\n'))}</textarea></label>
+  <h5>Привилегии</h5>
+  ${D.plans.map((p,i)=>`<div class="pl"><div class="row">${inp('Название',`plans.${i}.name`,p.name)}${inp('Цвет',`plans.${i}.color`,p.color,'color')}</div>
+  ${inp('Бейдж (пусто — скрыть)',`plans.${i}.badge`,p.badge)}
+  <div class="row">${inp('Цена / месяц',`plans.${i}.month`,p.month,'number')}${inp('Старая / месяц',`plans.${i}.monthOld`,p.monthOld,'number')}</div>
+  <div class="row">${inp('Цена навсегда',`plans.${i}.forever`,p.forever,'number')}${inp('Старая навсегда',`plans.${i}.foreverOld`,p.foreverOld,'number')}</div>
+  <label>Возможности (по строке)<textarea data-f="${i}">${esc(p.features.join('\n'))}</textarea></label>
+  <button class="btn" data-del="${i}">Удалить привилегию</button></div>`).join('')}
+  <button class="btn" id="addp">+ Добавить привилегию</button>
+  <h5>Разделы страницы</h5>
+  ${D.blocks.map((b,i)=>`<div class="pl">${inp('Заголовок',`blocks.${i}.title`,b.title)}${area('Текст',`blocks.${i}.text`,b.text)}<button class="btn" data-bd="${i}">Удалить раздел</button></div>`).join('')}
+  <button class="btn" id="addb">+ Добавить раздел</button>
+  <div class="bar"><button class="btn red" id="sv">Скачать сайт (index.html)</button><button class="btn" id="cls">Закрыть</button><span id="msg"></span></div></div>`;
+  const P=$('#adm .panel');
+  P.querySelectorAll('[data-k]').forEach(e=>e.oninput=()=>{let v=e.value;if(e.type==='number')v=v===''?0:+v;val(e.dataset.k,v);site()});
+  P.querySelectorAll('[data-c]').forEach(e=>e.onchange=()=>{val(e.dataset.c,e.checked);site()});
+  P.querySelectorAll('[data-f]').forEach(e=>e.oninput=()=>{D.plans[+e.dataset.f].features=e.value.split('\n').map(s=>s.trim()).filter(Boolean);site()});
+  P.querySelector('[data-nav]').oninput=e=>{D.nav=e.target.value.split('\n').map(l=>l.split('|').map(s=>s.trim())).filter(a=>a[0]).map(a=>[a[0],a[1]||'#']);site()};
+  P.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{D.plans.splice(+b.dataset.del,1);site();adm()});
+  P.querySelectorAll('[data-bd]').forEach(b=>b.onclick=()=>{D.blocks.splice(+b.dataset.bd,1);site();adm()});
+  $('#addp').onclick=()=>{D.plans.push({name:'Новая',color:'#e03a44',badge:'',month:500,monthOld:0,forever:1500,foreverOld:0,features:['Возможность 1']});site();adm()};
+  $('#addb').onclick=()=>{D.blocks.push({id:'b'+Date.now().toString(36),title:'Новый раздел',text:'Текст раздела'});site();adm()};
+  $('#cls').onclick=()=>{open=false;adm()};
+  $('#sv').onclick=save;
+}
+
+async function sha(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+function login(){
+  const m=document.createElement('div');m.className='modal';
+  m.innerHTML=`<div><h4>Вход для администратора</h4><label>Логин<input id="lu" autocomplete="username"></label><label>Пароль<input id="lp" type="password" autocomplete="current-password"></label><span id="le" style="color:var(--red);font-size:13px"></span><button class="btn red" id="lg">Войти</button><button class="btn" id="lc">Отмена</button></div>`;
+  $('#app').appendChild(m);
+  m.onclick=e=>{if(e.target===m)m.remove()};$('#lc').onclick=()=>m.remove();
+  const go=async()=>{
+    const ok=$('#lu').value.trim()===D.site.admUser&&(await sha($('#lp').value))===D.site.admHash;
+    if(!ok){$('#le').textContent='Неверный логин или пароль';return}
+    m.remove();isAdmin=true;
+    try{const d=localStorage.getItem('kp_draft');if(d&&confirm('Найден несохранённый черновик. Загрузить?')){const x=JSON.parse(d);Object.keys(D).forEach(k=>delete D[k]);Object.assign(D,x);site()}}catch(e){}
+    open=true;adm();
+  };
+  $('#lg').onclick=go;$('#lp').onkeydown=e=>{if(e.key==='Enter')go()};
+}
+async function save(){
+  const m=$('#msg');
+  const npw=$('#npw').value;if(npw)D.site.admHash=await sha(npw);
+  const c=document.documentElement.cloneNode(true);
+  c.querySelector('#app').innerHTML='';c.querySelector('#adm').innerHTML='';
+  c.querySelector('#data').textContent=JSON.stringify(D).replace(/</g,'\\u003c');
+  const blob=new Blob(['<!doctype html>\n'+c.outerHTML],{type:'text/html'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
+  try{localStorage.removeItem('kp_draft')}catch(e){}
+  m.textContent='Готово: загрузите index.html на хостинг';
+}
+let _t;document.addEventListener('input',()=>{if(!isAdmin)return;clearTimeout(_t);_t=setTimeout(()=>{try{localStorage.setItem('kp_draft',JSON.stringify(D))}catch(e){}},400)});
+site();
+if(location.hash==='#admin')login();
+</script>
+</body>
+</html>
