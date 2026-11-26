@@ -57,7 +57,7 @@ label{display:grid;gap:4px;font-size:12px;color:var(--mut)}
 #adm .panel{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg2);border-left:1px solid var(--line);z-index:40;overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(90px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;align-content:start}
 #adm .panel h5{margin:10px 0 0;font-size:15px;color:var(--gold)}
 #adm .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-#adm .bar{position:sticky;bottom:calc(-90px - env(safe-area-inset-bottom,0px));display:flex;gap:8px;background:var(--bg2);padding:12px 0;border-top:1px solid var(--line)}
+#adm .bar{flex-wrap:wrap;position:sticky;bottom:calc(-90px - env(safe-area-inset-bottom,0px));display:flex;gap:8px;background:var(--bg2);padding:12px 0;border-top:1px solid var(--line)}
 #adm .pl{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:10px}
 #msg{color:var(--mut);font-size:12px;align-self:center}
 </style>
@@ -144,7 +144,7 @@ function adm(){
   <h5>Разделы страницы</h5>
   ${D.blocks.map((b,i)=>`<div class="pl">${inp('Заголовок',`blocks.${i}.title`,b.title)}${area('Текст',`blocks.${i}.text`,b.text)}<button class="btn" data-bd="${i}">Удалить раздел</button></div>`).join('')}
   <button class="btn" id="addb">+ Добавить раздел</button>
-  <div class="bar"><button class="btn red" id="sv">Скачать сайт (index.html)</button><button class="btn" id="cls">Закрыть</button><span id="msg"></span></div></div>`;
+  <div class="bar"><button class="btn red" id="sv">Сохранить изменения (скачать файл)</button><button class="btn" id="cls">Закрыть</button><span id="msg"></span></div></div>`;
   const P=$('#adm .panel');
   P.querySelectorAll('[data-k]').forEach(e=>e.oninput=()=>{let v=e.value;if(e.type==='number')v=v===''?0:+v;val(e.dataset.k,v);site()});
   P.querySelectorAll('[data-c]').forEach(e=>e.onchange=()=>{val(e.dataset.c,e.checked);site()});
